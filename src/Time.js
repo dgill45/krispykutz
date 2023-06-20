@@ -9,7 +9,7 @@ function Time(props) {
  
  return (
  <div>
-  {props.appointment ? <Times date={props.date}/> : null}
+  {props.showTime ? <Times date={props.date}/> : null}
  </div>
   )
 }
