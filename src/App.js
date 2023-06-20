@@ -1,25 +1,38 @@
 import {useState} from 'react';
-import 'react-calendar/dist/Calendar.css'
-import Calendar from 'react-calendar'; 
+import Calendar from 'react-calendar';
 import './App.css';
+import Time from './Time.js'
 
 function App() {
- const [date, setDate] = useState(new Date())
+ 
+const [date, setDate] = useState(new Date());
+const [appointment, setAppointment] = useState(false) 
 
-
-
-return (
- <div className="app">
-   <h1 className="header">React Calendar</h1>
-   <div className="calendar-container">
-     <Calendar onChange={setDate} value={date}/>
+ return (
+ <div className='app'>
+   <h1 className='header'>React Calendar</h1>
+   <div>
+    <Calendar onChange={setDate} value={date} onClickDay={() => setAppointment(true)}/>
    </div>
-   <div className="text-center">
-      Selected date: {date.toDateString()}
-   </div>
+
+   {date.length > 0 ? (
+   <p>
+     <span>Start:</span>
+     {date[0].toDateString()}
+     &nbsp;
+     &nbsp;
+     <span>End:</span>{date[1].toDateString()}
+   </p>
+          ) : (
+   <p>
+      <span>Default selected date:</span>{date.toDateString()}
+   </p> 
+          )
+   }
+   <Time appointment={appointment} date={date}/>
+
  </div>
   )
-
 }
 
 export default App;
